@@ -8,6 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -30,11 +31,12 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
         <script src="data/ALAEWLPBScope_1.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[-35.03233090535089,117.87832317688928],[-34.93317945575981,118.04233133938935]]);
+        }).fitBounds([[-34.978887152081484,117.9271702461038],[-34.92900038532299,118.00968882735373]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -58,7 +60,8 @@
         function pop_ALAEWLPBScope_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Task</strong><br />' + (feature.properties['Task'] !== null ? autolinker.link(feature.properties['Task'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Task</th>\
+                        <td>' + (feature.properties['Task'] !== null ? autolinker.link(feature.properties['Task'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Maris</th>\
@@ -139,21 +142,21 @@
                 pane: 'pane_ALAEWLPBScope_1',
                 radius: 4.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(61,128,53,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
+                weight: 2.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(51,249,11,1.0)',
+                fillColor: 'rgba(84,176,74,1.0)',
                 interactive: true,
             }
                     break;
                 case 'Task':
                     return {
                 pane: 'pane_ALAEWLPBScope_1',
-                radius: 6.0,
+                radius: 8.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -162,7 +165,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(247,52,8,1.0)',
+                fillColor: 'rgba(245,122,21,1.0)',
                 interactive: true,
             }
                     break;
@@ -178,7 +181,7 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(218,54,175,1.0)',
+                fillColor: 'rgba(201,94,210,1.0)',
                 interactive: true,
             }
                     break;
@@ -211,13 +214,20 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Maris'] !== null?String('<div style="color: #ffff4b; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Maris']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ALAEWLPBScope_1'});
+            layer.bindTooltip((layer.feature.properties['Maris'] !== null?String('<div style="color: #d6fa22; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['Maris']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ALAEWLPBScope_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
+        map.addControl(new L.Control.Search({
+            layer: layer_ALAEWLPBScope_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Maris'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
         resetLabels([layer_ALAEWLPBScope_1]);
         map.on("zoomend", function(){
             resetLabels([layer_ALAEWLPBScope_1]);
