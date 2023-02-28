@@ -17,7 +17,7 @@
             margin: 0;
         }
         </style>
-        <title>March Service 2023</title>
+        <title></title>
     </head>
     <body>
         <div id="map">
@@ -36,7 +36,7 @@
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[-35.051450388847265,117.88230150117818],[-34.95167685533041,118.0473386636778]]);
+        }).fitBounds([[-35.008430388807355,117.91851342481343],[-34.95907183487343,118.00103200606324]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -83,10 +83,6 @@
                         <td>' + (feature.properties['Easting'] !== null ? autolinker.link(feature.properties['Easting'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">UTM_Zone</th>\
-                        <td>' + (feature.properties['UTM_Zone'] !== null ? autolinker.link(feature.properties['UTM_Zone'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Latitude</th>\
                         <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -127,23 +123,15 @@
                         <td>' + (feature.properties['Infrastructure_Subgroup_Code'] !== null ? autolinker.link(feature.properties['Infrastructure_Subgroup_Code'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Responsible_Agency</th>\
-                        <td>' + (feature.properties['Responsible_Agency'] !== null ? autolinker.link(feature.properties['Responsible_Agency'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">NavAid_Colour</th>\
                         <td>' + (feature.properties['NavAid_Colour'] !== null ? autolinker.link(feature.properties['NavAid_Colour'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Status</th>\
-                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
         function style_ALAEWLPBScope_1_0(feature) {
-            switch(String(feature.properties['Status'])) {
+            switch(String(feature.properties['q2wHide_Status'])) {
                 case 'Service':
                     return {
                 pane: 'pane_ALAEWLPBScope_1',
